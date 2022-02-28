@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import useTypingEffect from 'use-typing-effect';
@@ -10,18 +10,29 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { use100vh } from 'react-div-100vh';
-import { db, getText } from '../lib/firebase';
+import { db, getText, writeText } from '../lib/firebase';
 import UserAvatar from '../components/UserAvatar';
+import { debounce } from 'debounce'
+import { useUser } from '../hooks/useUser';
 
 export default function Home() {
   const loadingText = useTypingEffect(['Type Below...']);
   const height = use100vh();
+  const [user, _setUser] = useUser();
+  const [defaultText, setDefaultText] = useState("");
+  const uid = user?.uid;
 
   useEffect(() => {
-    // const text = getText(db);
-    // text.then(result => console.log(result));
-    
-  }, [])
+
+    if (uid) {
+      const text = getText(db, uid);
+      text.then(result => result?.text && setDefaultText(result?.text));
+    }
+  }, [user])
+
+  const handleChange = debounce(async (e) => {
+    uid && e.target.value && writeText(uid, e.target.value);
+  }, 1000)
 
   //template
   return (
@@ -51,7 +62,8 @@ export default function Home() {
           hiddenLabel
           multiline
           rows={15}
-          defaultValue=""
+          defaultValue={defaultText}
+          onChange={e => handleChange(e)}
         />
         <Grid container spacing={2} sx={{ marginTop: '1px' }}>
           <Grid item>
