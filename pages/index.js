@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import useTypingEffect from 'use-typing-effect';
@@ -9,10 +10,18 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { use100vh } from 'react-div-100vh';
+import { db, getText } from '../lib/firebase';
+import UserAvatar from '../components/UserAvatar';
 
 export default function Home() {
-  const loadingText = useTypingEffect(['Type Here...']);
+  const loadingText = useTypingEffect(['Type Below...']);
   const height = use100vh();
+
+  useEffect(() => {
+    // const text = getText(db);
+    // text.then(result => console.log(result));
+    
+  }, [])
 
   //template
   return (
@@ -23,7 +32,10 @@ export default function Home() {
         autoComplete="off"
         sx={{ width: 1, height: height }}
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
+          <Grid item sx={{ marginTop: '8px' }}>
+            <UserAvatar />
+          </Grid>
           <Grid item>
             <Chip
               icon={<TextSnippetIcon />}
