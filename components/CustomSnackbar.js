@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment, forwardRef } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-export default function CustomSnackbar({ alert, setAlert, message }) {
+export default function CustomSnackbar({ alert, setAlert, alertProps }) {
   const [open, setOpen] = useState(false);
 
   const handleClose = (_event) => {
@@ -17,19 +17,19 @@ export default function CustomSnackbar({ alert, setAlert, message }) {
   useEffect(() => {
     alert && setOpen(true);
   }, [alert])
-  
+
   //template
   return (
     <Fragment>
-      <Snackbar
+      {alertProps && <Snackbar
         open={open}
-        autoHideDuration={2000}
+        autoHideDuration={alertProps.autoHideDuration}
         onClose={(e) => handleClose(e)}
       >
-        <Alert severity="success">
-          {message}
+        <Alert severity={alertProps.severity}>
+          {alertProps.message}
         </Alert>
-      </Snackbar>
+      </Snackbar>}
     </Fragment>
   )
 }
