@@ -16,6 +16,8 @@ import { debounce } from 'debounce'
 import { useUser } from '../hooks/useUser';
 import axios from 'axios'
 import CustomSnackbar from '../components/CustomSnackbar';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function Home() {
   const loadingText = useTypingEffect(['Type Below...']);
@@ -23,6 +25,7 @@ export default function Home() {
   const [user, _setUser] = useUser();
   const [defaultText, setDefaultText] = useState("");
   const [emailAlert, setEmailAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
   const uid = user?.uid;
 
   useEffect(() => {
@@ -42,6 +45,11 @@ export default function Home() {
     handleChange(e);
   }
 
+  const copyText = () => {
+    setAlertMsg(`Copied!`);
+    setEmailAlert(true);
+  }
+
   const clearText = () => {
     uid && writeText(uid, "");
     setDefaultText("");
@@ -52,6 +60,7 @@ export default function Home() {
       { params: { to: user.email, content: defaultText } }
     )
 
+    setAlertMsg(`Email sent to ${user?.email}!`);
     setEmailAlert(true);
   }
 
@@ -90,6 +99,14 @@ export default function Home() {
             />
             <Grid container spacing={2} sx={{ marginTop: '1px' }}>
               <Grid item>
+                <CopyToClipboard text={defaultText}
+                  onCopy={() => copyText()}>
+                  <Button sx={{ boxShadow: 3, color: 'black' }} variant="text" startIcon={<ContentCopyIcon />}>
+                    Copy
+                  </Button>
+                </CopyToClipboard>
+              </Grid>
+              <Grid item>
                 <Button sx={{ boxShadow: 3, color: 'red' }} onClick={() => clearText()} variant="text" startIcon={<DeleteIcon />}>
                   Clear
                 </Button>
@@ -103,7 +120,7 @@ export default function Home() {
           </Box>
         </Container>
       }
-      <CustomSnackbar alert={emailAlert} setAlert={setEmailAlert} message={`Email sent to ${user?.email} !`} />
+      <CustomSnackbar alert={emailAlert} setAlert={setEmailAlert} message={alertMsg} />
     </Fragment>
   )
 }
