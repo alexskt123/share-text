@@ -6,6 +6,11 @@ import SignInModal from './SignInModal';
 import { getAuth } from 'firebase/auth';
 import { Divider } from '@mui/material';
 import { useUser } from '../hooks/useUser';
+import { deepPurple } from '@mui/material/colors';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function UserAvatar() {
 
@@ -35,9 +40,11 @@ export default function UserAvatar() {
   return (
     <Fragment>
       <Avatar
-        sx={{ cursor: 'pointer', width: 35, height: 35 }}
+        sx={{ boxShadow: 3, cursor: 'pointer', width: 35, height: 35, bgcolor: user?.uid && deepPurple[500] }}
         onClick={(e) => handleClick(e)}
-      />
+      >
+        {user?.uid && user?.displayName.split('').find(x => x)}
+      </Avatar>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
@@ -53,11 +60,31 @@ export default function UserAvatar() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Text List</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <AccountCircleIcon />
+          <span style={{ marginLeft: '7px' }}>
+            {'Profile'}
+          </span>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <TextSnippetIcon />
+          <span style={{ marginLeft: '7px' }}>
+            {'Text List'}
+          </span>
+        </MenuItem>
         <Divider />
-        {!user && <MenuItem onClick={() => handleLogIn()}>Log In</MenuItem>}
-        {user && <MenuItem onClick={() => handleLogOut()}>Log Out</MenuItem>}
+        {!user && <MenuItem onClick={() => handleLogIn()}>
+          <LoginIcon />
+          <span style={{ marginLeft: '7px' }}>
+            {'Log In'}
+          </span>
+        </MenuItem>}
+        {user && <MenuItem onClick={() => handleLogOut()}>
+          <LogoutIcon />
+          <span style={{ marginLeft: '7px' }}>
+            {'Log Out'}
+          </span>
+        </MenuItem>}
       </Menu>
       <SignInModal show={showSignInModal} handleClose={handleClose} />
     </Fragment>

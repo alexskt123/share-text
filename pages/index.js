@@ -74,14 +74,14 @@ export default function Home() {
                 <Chip
                   icon={<TextSnippetIcon />}
                   label={loadingText}
-                  sx={{ marginTop: '10px' }}
+                  sx={{ marginTop: '10px', boxShadow: 3 }}
                   color="warning"
                 />
               </Grid>
             </Grid>
             <TextField
               id="outlined-multiline-static"
-              sx={{ marginTop: '10px', width: 1 }}
+              sx={{ marginTop: '10px', width: 1, boxShadow: 3 }}
               hiddenLabel
               multiline
               rows={15}
@@ -90,12 +90,12 @@ export default function Home() {
             />
             <Grid container spacing={2} sx={{ marginTop: '1px' }}>
               <Grid item>
-                <Button onClick={() => clearText()} variant="outlined" startIcon={<DeleteIcon />}>
+                <Button sx={{ boxShadow: 3, color: 'red' }} onClick={() => clearText()} variant="text" startIcon={<DeleteIcon />}>
                   Clear
                 </Button>
               </Grid>
               <Grid item>
-                <Button onClick={() => handleSend()} variant="contained" endIcon={<SendIcon />}>
+                <Button sx={{ boxShadow: 3 }} onClick={() => handleSend()} variant="text" endIcon={<SendIcon />}>
                   Send
                 </Button>
               </Grid>
