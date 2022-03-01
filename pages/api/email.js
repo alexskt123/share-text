@@ -1,20 +1,24 @@
 import axios from 'axios'
-import Qs from 'qs'
 
 export default async (req, res) => {
   const { to, content } = req.query;
+  let result = 'OK';
 
-  if (to && content) {
-    axios.post(process.env.MQ_URL, null, {
-      paramsSerializer: function (params) {
-        return Qs.stringify(params, { arrayFormat: 'repeat' })
-      },
-      params: {
-        to, content
-      }
-    })
+  try {
+    if (to && content) {
+      const response = await axios.post(process.env.MQ_URL, null, {
+        params: {
+          to, content
+        }
+      });
+      result = JSON.stringify(response?.data || {});
+    }
+  } catch (error) {
+    result = error.toString();
   }
 
+  console.log(result);
+
   res.statusCode = 200
-  res.json({ response: 'OK' })
+  res.json({ response: result });
 }
