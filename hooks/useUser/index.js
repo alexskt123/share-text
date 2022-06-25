@@ -1,7 +1,7 @@
 import { getAuth, onAuthStateChanged } from '../../lib/firebase';
 import createPersistedState from 'use-persisted-state'
 
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 
 const useUserState = createPersistedState('user')
 
