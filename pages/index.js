@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { use100vh } from 'react-div-100vh';
-import { db, getText, writeText } from '../lib/firebase';
+import { useText, writeText } from '../lib/firebase';
 import { debounce } from 'debounce'
 import { useUser } from '../hooks/useUser';
 import ToolPanel from '../components/ToolPanel';
@@ -15,12 +15,10 @@ export default function Home() {
   const [defaultText, setDefaultText] = useState("");
   const uid = user?.uid;
 
+  const text = useText(uid);
   useEffect(() => {
-    if (uid) {
-      const text = getText(db, uid);
-      text.then(result => result?.text && setDefaultText(result?.text));
-    }
-  }, [user])
+    text && setDefaultText(text?.text);
+  }, [text])
 
   const handleChange = debounce(async (e) => {
     uid && e.target.value && writeText(uid, e.target.value);
