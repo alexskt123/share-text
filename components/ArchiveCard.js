@@ -1,28 +1,51 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import { Fragment, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { deleteArchiveText } from '../lib/firebase';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import CustomSnackbar from './CustomSnackbar';
 
-export default function BasicCard({ title, text, createdAt }) {
+export default function BasicCard({ title, text, createdAt, id }) {
+
+  const [emailAlert, setEmailAlert] = useState(false);
+  const [alertProps, setAlertProps] = useState({ message: '', severity: 'success', autoHideDuration: 2000 });
+
+  const deleteArchive = async (docID) => {
+    deleteArchiveText(docID);
+
+  }
+
+  const copyText = () => {
+    setAlertProps({ ...alertProps, message: `Copied!` });
+    setEmailAlert(true);
+  }
+
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="body2">
-          {text}
-        </Typography>
-        <Typography sx={{ fontSize:10, marginTop: '10px' }} color="text.secondary">
-          {createdAt}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" sx={{ color: 'red' }}>{'Delete'}</Button>
-      </CardActions>
-    </Card>
+    <Fragment>
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
+            {title}
+          </Typography>
+          <Typography variant="body2">
+            {text}
+          </Typography>
+          <Typography sx={{ fontSize: 10, marginTop: '10px' }} color="text.secondary">
+            {createdAt}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <CopyToClipboard text={text}
+            onCopy={() => copyText()}>
+            <Button size="small" sx={{ color: 'blue' }}>{'Copy'}</Button>
+          </CopyToClipboard>
+          <Button size="small" sx={{ color: 'red' }} onClick={() => deleteArchive(id)}>{'Delete'}</Button>
+        </CardActions>
+      </Card>
+      <CustomSnackbar alert={emailAlert} setAlert={setEmailAlert} alertProps={alertProps} />
+    </Fragment>
   );
 }
