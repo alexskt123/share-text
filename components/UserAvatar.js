@@ -11,8 +11,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useRouter } from 'next/router';
 
 export default function UserAvatar() {
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [showSignInModal, setShowSignInModal] = useState(false);
@@ -25,6 +27,10 @@ export default function UserAvatar() {
   const handleClose = () => {
     setAnchorEl(null);
     setShowSignInModal(false);
+  };
+  const handleTextListClick = () => {
+    router.push('/textList');
+    handleClose();
   };
   const handleLogIn = () => {
     setShowSignInModal(true);
@@ -66,7 +72,7 @@ export default function UserAvatar() {
             {'Profile'}
           </span>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => handleTextListClick()}>
           <TextSnippetIcon />
           <span style={{ marginLeft: '7px' }}>
             {'Text List'}

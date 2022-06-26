@@ -6,6 +6,7 @@ import { use100vh } from 'react-div-100vh';
 import { useText, writeText } from '../lib/firebase';
 import { debounce } from 'debounce'
 import { useUser } from '../hooks/useUser';
+import ArchivePanel from '../components/ArchivePanel';
 import ToolPanel from '../components/ToolPanel';
 import HeaderPanel from '../components/HeaderPanel';
 
@@ -56,6 +57,7 @@ export default function Home() {
               onChange={e => changeText(e)}
             />
             <ToolPanel inputText={defaultText} clearText={clearText} />
+            <ArchivePanel inputText={defaultText} uid={uid} />
           </Box>
         </Container>
       }

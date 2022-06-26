@@ -42,18 +42,18 @@ export default function ToolPanel({ inputText, clearText }) {
           <Grid item>
             <CopyToClipboard text={defaultText}
               onCopy={() => copyText()}>
-              <Button sx={{ boxShadow: 3, color: 'black' }} variant="text" startIcon={<ContentCopyIcon />}>
+              <Button size='small' sx={{ boxShadow: 3, color: 'black' }} variant="text" startIcon={<ContentCopyIcon />}>
                 {'Copy'}
               </Button>
             </CopyToClipboard>
           </Grid>
           <Grid item>
-            <Button sx={{ boxShadow: 3, color: 'red' }} onClick={() => clearText()} variant="text" startIcon={<DeleteIcon />}>
+            <Button size='small' sx={{ boxShadow: 3, color: 'red' }} onClick={() => clearText()} variant="text" startIcon={<DeleteIcon />}>
               {'Clear'}
             </Button>
           </Grid>
           <Grid item>
-            <Button sx={{ boxShadow: 3 }} onClick={() => handleSend()} variant="text" endIcon={<SendIcon />}>
+            <Button size='small' sx={{ boxShadow: 3 }} onClick={() => handleSend()} variant="text" endIcon={<SendIcon />}>
               {'Send'}
             </Button>
           </Grid>
