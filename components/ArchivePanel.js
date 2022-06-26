@@ -39,7 +39,7 @@ export default function ToolPanel({ inputText, uid }) {
             </Box>
           </Grid>
           <Grid item>
-            <Button sx={{ boxShadow: 3, color: 'green' }} onClick={() => archiveText()} variant="text" startIcon={<ArchiveIcon />}>
+            <Button size='small' sx={{ boxShadow: 3, color: 'green' }} onClick={() => archiveText()} variant="text" startIcon={<ArchiveIcon />}>
               {'Archive'}
             </Button>
           </Grid>
