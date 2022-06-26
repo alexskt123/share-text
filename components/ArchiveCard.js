@@ -25,7 +25,7 @@ export default function BasicCard({ title, text, createdAt, id }) {
 
   return (
     <Fragment>
-      <Card sx={{ minWidth: 275 }}>
+      <Card sx={{ minWidth: 250, maxWidth: 500 }}>
         <CardContent>
           <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
             {title}
