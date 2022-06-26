@@ -30,7 +30,7 @@ export default function BasicCard({ title, text, createdAt, id }) {
           <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
             {title}
           </Typography>
-          <Typography variant="body2">
+          <Typography sx={{ background: '#f2f4f7', padding: '5px'}} variant="body2">
             {text}
           </Typography>
           <Typography sx={{ fontSize: 10, marginTop: '10px' }} color="text.secondary">
