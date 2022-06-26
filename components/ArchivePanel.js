@@ -7,9 +7,11 @@ import CustomSnackbar from './CustomSnackbar';
 import { Box, TextField } from '@mui/material';
 import moment from 'moment';
 import { archive } from '../lib/firebase';
+import { GLOBAL_DATETIME_FORMAT } from '../config';
 
 export default function ToolPanel({ inputText, uid }) {
-  const nowTime = moment().format('MMMM DD YYYY hh:mm:ss');
+  const nowUnixTime = moment().unix() * 1000;
+  const nowTime = moment(nowUnixTime).format(GLOBAL_DATETIME_FORMAT);
 
   const [titleText, setTitleText] = useState(nowTime);
   const [emailAlert, setEmailAlert] = useState(false);
@@ -18,7 +20,7 @@ export default function ToolPanel({ inputText, uid }) {
   const archiveText = () => {
     setAlertProps({ ...alertProps, message: `Archived!` });
     setEmailAlert(true);
-    archive(uid, { title: titleText, text: inputText, uid, createdAt: nowTime });
+    archive(uid, { title: titleText, text: inputText, uid, createdAt: nowUnixTime });
   }
 
   const changeText = (e) => {

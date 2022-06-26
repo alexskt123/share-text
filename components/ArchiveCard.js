@@ -7,8 +7,12 @@ import Typography from '@mui/material/Typography';
 import { deleteArchiveText } from '../lib/firebase';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import CustomSnackbar from './CustomSnackbar';
+import moment from 'moment';
+import { GLOBAL_DATETIME_FORMAT } from '../config';
 
 export default function BasicCard({ title, text, createdAt, id }) {
+
+  const createdAtFormatted = moment(createdAt).format(GLOBAL_DATETIME_FORMAT);
 
   const [emailAlert, setEmailAlert] = useState(false);
   const [alertProps, setAlertProps] = useState({ message: '', severity: 'success', autoHideDuration: 2000 });
@@ -34,7 +38,7 @@ export default function BasicCard({ title, text, createdAt, id }) {
             {text}
           </Typography>
           <Typography sx={{ fontSize: 10, marginTop: '10px' }} color="text.secondary">
-            {createdAt}
+            {createdAtFormatted}
           </Typography>
         </CardContent>
         <CardActions>
