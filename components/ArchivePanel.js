@@ -35,7 +35,7 @@ export default function ToolPanel({ inputText, uid }) {
           <Grid item>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <ListAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-              <TextField id="input-with-sx" label="Title" variant="standard" value={titleText} onChange={e => changeText(e)} />
+              <TextField sx={{ width: '200px' }} id="input-with-sx" label="Title" variant="standard" value={titleText} onChange={e => changeText(e)} />
             </Box>
           </Grid>
           <Grid item>
