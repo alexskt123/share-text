@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const sendEmail = async (req, res) => {
+export default async function email(req, res) {
   const { to, content } = req.query;
   let result = 'OK';
 
@@ -20,5 +20,3 @@ const sendEmail = async (req, res) => {
   res.statusCode = 200;
   res.json({ response: result });
 };
-
-export default sendEmail;
