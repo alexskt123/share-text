@@ -8,7 +8,7 @@ import { Grid } from '@mui/material';
 import { useUser } from '../hooks/useUser';
 import { useArchiveText } from '../lib/firebase';
 
-export default function textList() {
+export default function TextList() {
 
   const height = use100vh();
   const [user, _setUser] = useUser();
@@ -38,5 +38,5 @@ export default function textList() {
         </Container>
       }
     </Fragment>
-  )
+  );
 }

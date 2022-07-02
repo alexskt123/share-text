@@ -7,7 +7,7 @@ import UserAvatar from '../components/UserAvatar';
 import { useRouter } from 'next/router';
 
 export default function HeaderPanel() {
-  const router = useRouter()
+  const router = useRouter();
 
   const loadingText = useTypingEffect(['Type Below...']);
 
@@ -35,6 +35,6 @@ export default function HeaderPanel() {
         </Grid>
       }
     </Fragment>
-  )
+  );
 }
 

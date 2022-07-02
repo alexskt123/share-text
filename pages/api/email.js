@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-export default async (req, res) => {
+const sendEmail = async (req, res) => {
   const { to, content } = req.query;
   let result = 'OK';
 
@@ -17,8 +17,8 @@ export default async (req, res) => {
     result = error.toString();
   }
 
-  console.log(result);
-
-  res.statusCode = 200
+  res.statusCode = 200;
   res.json({ response: result });
-}
+};
+
+export default sendEmail;
