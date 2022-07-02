@@ -25,7 +25,7 @@ export default function WhatsappPanel() {
       await writeProfile(user?.uid, {
         ...userProfile,
         whatsapp: [
-          ...userProfile?.whatsapp,
+          ...(userProfile?.whatsapp || []),
           {
             phone: input,
             active: false
@@ -63,7 +63,7 @@ export default function WhatsappPanel() {
     <Fragment>
       <Stack direction="row" spacing={1}>
         {
-          userProfile?.whatsapp.map((item, idx) => {
+          userProfile?.whatsapp?.map((item, idx) => {
             return <Chip
               key={idx}
               label={item.phone}

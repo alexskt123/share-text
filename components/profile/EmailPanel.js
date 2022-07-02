@@ -25,7 +25,7 @@ export default function EmailPanel() {
       await writeProfile(user?.uid, {
         ...userProfile,
         email: [
-          ...userProfile?.email,
+          ...(userProfile?.email || []),
           {
             to: input,
             active: false
@@ -63,7 +63,7 @@ export default function EmailPanel() {
     <Fragment>
       <Stack direction="row" spacing={1}>
         {
-          userProfile?.email.map((item, idx) => {
+          userProfile?.email?.map((item, idx) => {
             return <Chip
               key={idx}
               label={item.to}
