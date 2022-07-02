@@ -32,6 +32,10 @@ export default function UserAvatar() {
     router.push('/textList');
     handleClose();
   };
+  const handleProfileClick = () => {
+    router.push('/profile');
+    handleClose();
+  }
   const handleLogIn = () => {
     setShowSignInModal(true);
   }
@@ -66,7 +70,7 @@ export default function UserAvatar() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => handleProfileClick()}>
           <AccountCircleIcon />
           <span style={{ marginLeft: '7px' }}>
             {'Profile'}
