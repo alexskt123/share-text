@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "eslint-config-next": "12.2.0",
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
     "lint-staged": "^13.0.3"
   }
 }
