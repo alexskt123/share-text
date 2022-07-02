@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useProfile, writeProfile } from '../../lib/firebase';
@@ -61,21 +61,26 @@ export default function EmailPanel() {
 
   return (
     <Fragment>
-      <Stack direction="row" spacing={1}>
+      <Grid container spacing={1}>
         {
           userProfile?.email?.map((item, idx) => {
-            return <Chip
-              key={idx}
-              label={item.to}
-              color={item?.active ? 'success' : undefined}
-              variant={'outlined'}
-              onClick={() => handleClick(item.to)}
-              onDelete={() => handleDelete(item.to)}
-              deleteIcon={<DeleteIcon />}
-            />;
+            return (
+              <Fragment key={idx}>
+                <Grid item>
+                  <Chip
+                    label={item.to}
+                    color={item?.active ? 'success' : undefined}
+                    variant={'outlined'}
+                    onClick={() => handleClick(item.to)}
+                    onDelete={() => handleDelete(item.to)}
+                    deleteIcon={<DeleteIcon />}
+                  />
+                </Grid>
+              </Fragment>
+            );
           })
         }
-      </Stack>
+      </Grid>
       <Fab color="primary" aria-label="add" sx={fabStyle} onClick={() => handleAdd()}>
         <AddIcon />
       </Fab>

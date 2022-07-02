@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useProfile, writeProfile } from '../../lib/firebase';
@@ -61,21 +61,26 @@ export default function WhatsappPanel() {
 
   return (
     <Fragment>
-      <Stack direction="row" spacing={1}>
+      <Grid container spacing={1}>
         {
           userProfile?.whatsapp?.map((item, idx) => {
-            return <Chip
-              key={idx}
-              label={item.phone}
-              color={item?.active ? 'success' : undefined}
-              variant={'outlined'}
-              onClick={() => handleClick(item.phone)}
-              onDelete={() => handleDelete(item.phone)}
-              deleteIcon={<DeleteIcon />}
-            />;
+            return (
+              <Fragment key={idx}>
+                <Grid item><Chip
+                  key={idx}
+                  label={item.phone}
+                  color={item?.active ? 'success' : undefined}
+                  variant={'outlined'}
+                  onClick={() => handleClick(item.phone)}
+                  onDelete={() => handleDelete(item.phone)}
+                  deleteIcon={<DeleteIcon />}
+                />
+                </Grid>
+              </Fragment>
+            );
           })
         }
-      </Stack>
+      </Grid>
       <Fab color="primary" aria-label="add" sx={fabStyle} onClick={() => handleAdd()}>
         <AddIcon />
       </Fab>
