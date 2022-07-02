@@ -31,17 +31,17 @@ export default function WhatsappPanel() {
             active: false
           }
         ]
-      })
+      });
     }
 
-  }
+  };
 
   const handleClick = async (e) => {
     const newwhatsappList = (userProfile?.whatsapp || []).map(item => {
       return {
         ...item,
         active: item.phone === e ? true : false
-      }
+      };
     });
 
     await writeProfile(user?.uid, {
@@ -49,14 +49,14 @@ export default function WhatsappPanel() {
       whatsapp: [
         ...newwhatsappList
       ]
-    })
+    });
   };
 
   const handleDelete = async (e) => {
     await writeProfile(user?.uid, {
       ...userProfile,
       whatsapp: userProfile?.whatsapp.filter(x => x.phone !== e)
-    })
+    });
   };
 
   return (
@@ -68,11 +68,11 @@ export default function WhatsappPanel() {
               key={idx}
               label={item.phone}
               color={item?.active ? 'success' : undefined}
-              variant={"outlined"}
+              variant={'outlined'}
               onClick={() => handleClick(item.phone)}
               onDelete={() => handleDelete(item.phone)}
               deleteIcon={<DeleteIcon />}
-            />
+            />;
           })
         }
       </Stack>

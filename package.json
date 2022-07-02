@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -27,5 +30,12 @@
     "sweetalert2": "^11.4.19",
     "use-persisted-state": "^0.3.3",
     "use-typing-effect": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-next": "^12.2.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
   }
 }

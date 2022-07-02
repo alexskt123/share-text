@@ -35,17 +35,17 @@ export default function UserAvatar() {
   const handleProfileClick = () => {
     router.push('/profile');
     handleClose();
-  }
+  };
   const handleLogIn = () => {
     setShowSignInModal(true);
-  }
+  };
 
   const handleLogOut = () => {
     const auth = getAuth();
     auth.signOut();
     setUser(null);
     handleClose();
-  }
+  };
 
   return (
     <Fragment>
@@ -98,5 +98,5 @@ export default function UserAvatar() {
       </Menu>
       <SignInModal show={showSignInModal} handleClose={handleClose} />
     </Fragment>
-  )
+  );
 }

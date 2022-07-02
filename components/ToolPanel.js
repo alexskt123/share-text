@@ -4,35 +4,35 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useUser } from '../hooks/useUser';
-import axios from 'axios'
+import axios from 'axios';
 import CustomSnackbar from '../components/CustomSnackbar';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function ToolPanel({ inputText, clearText }) {
   const [user, _setUser] = useUser();
-  const [defaultText, setDefaultText] = useState("");
+  const [defaultText, setDefaultText] = useState('');
   const [emailAlert, setEmailAlert] = useState(false);
   const [alertProps, setAlertProps] = useState({ message: '', severity: 'success', autoHideDuration: 2000 });
   const uid = user?.uid;
 
   const copyText = () => {
-    setAlertProps({ ...alertProps, message: `Copied!` });
+    setAlertProps({ ...alertProps, message: 'Copied!' });
     setEmailAlert(true);
-  }
+  };
 
   const handleSend = () => {
     uid && user?.email && axios.post('/api/email', null,
       { params: { to: user.email, content: defaultText } }
-    )
+    );
 
     setAlertProps({ ...alertProps, message: `Email sent to ${user?.email}!` });
     setEmailAlert(true);
-  }
+  };
 
   useEffect(() => {
     setDefaultText(inputText);
-  }, [inputText])
+  }, [inputText]);
 
   //template
   return (
@@ -61,6 +61,6 @@ export default function ToolPanel({ inputText, clearText }) {
       }
       <CustomSnackbar alert={emailAlert} setAlert={setEmailAlert} alertProps={alertProps} />
     </Fragment>
-  )
+  );
 }
 

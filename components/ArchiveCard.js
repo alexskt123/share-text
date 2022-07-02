@@ -20,12 +20,12 @@ export default function BasicCard({ title, text, createdAt, id }) {
   const deleteArchive = async (docID) => {
     deleteArchiveText(docID);
 
-  }
+  };
 
   const copyText = () => {
-    setAlertProps({ ...alertProps, message: `Copied!` });
+    setAlertProps({ ...alertProps, message: 'Copied!' });
     setEmailAlert(true);
-  }
+  };
 
   return (
     <Fragment>

@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -46,7 +46,7 @@ const SignInModal = ({ show, handleClose }) => {
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-  }
+  };
 
   return (
     <Fragment>
@@ -72,7 +72,7 @@ const SignInModal = ({ show, handleClose }) => {
         </Box>
       </Modal>
     </Fragment>
-  )
-}
+  );
+};
 
-export default SignInModal
+export default SignInModal;

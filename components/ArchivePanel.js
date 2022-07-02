@@ -18,14 +18,14 @@ export default function ToolPanel({ inputText, uid }) {
   const [alertProps, setAlertProps] = useState({ message: '', severity: 'success', autoHideDuration: 2000 });
 
   const archiveText = () => {
-    setAlertProps({ ...alertProps, message: `Archived!` });
+    setAlertProps({ ...alertProps, message: 'Archived!' });
     setEmailAlert(true);
     archive(uid, { title: titleText, text: inputText, uid, createdAt: nowUnixTime });
-  }
+  };
 
   const changeText = (e) => {
     setTitleText(e.target.value);
-  }
+  };
 
   //template
   return (
@@ -47,6 +47,6 @@ export default function ToolPanel({ inputText, uid }) {
       }
       <CustomSnackbar alert={emailAlert} setAlert={setEmailAlert} alertProps={alertProps} />
     </Fragment>
-  )
+  );
 }
 

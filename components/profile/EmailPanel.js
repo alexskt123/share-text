@@ -31,17 +31,17 @@ export default function EmailPanel() {
             active: false
           }
         ]
-      })
+      });
     }
 
-  }
+  };
 
   const handleClick = async (e) => {
     const newEmailList = (userProfile?.email || []).map(item => {
       return {
         ...item,
         active: item.to === e ? true : false
-      }
+      };
     });
 
     await writeProfile(user?.uid, {
@@ -49,14 +49,14 @@ export default function EmailPanel() {
       email: [
         ...newEmailList
       ]
-    })
+    });
   };
 
   const handleDelete = async (e) => {
     await writeProfile(user?.uid, {
       ...userProfile,
       email: userProfile?.email.filter(x => x.to !== e)
-    })
+    });
   };
 
   return (
@@ -68,11 +68,11 @@ export default function EmailPanel() {
               key={idx}
               label={item.to}
               color={item?.active ? 'success' : undefined}
-              variant={"outlined"}
+              variant={'outlined'}
               onClick={() => handleClick(item.to)}
               onDelete={() => handleDelete(item.to)}
               deleteIcon={<DeleteIcon />}
-            />
+            />;
           })
         }
       </Stack>

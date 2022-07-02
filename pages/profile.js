@@ -26,11 +26,11 @@ export default function Profile() {
           >
             <HeaderPanel />
             <Box sx={{ marginLeft: '5px', marginTop: '15px' }}>
-                <ProfilePanel />
+              <ProfilePanel />
             </Box>
           </Box>
         </Container>
       }
     </Fragment>
-  )
+  );
 }

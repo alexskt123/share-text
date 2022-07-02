@@ -16,7 +16,7 @@ export default function CustomSnackbar({ alert, setAlert, alertProps }) {
 
   useEffect(() => {
     alert && setOpen(true);
-  }, [alert])
+  }, [alert]);
 
   //template
   return (
@@ -31,6 +31,6 @@ export default function CustomSnackbar({ alert, setAlert, alertProps }) {
         </Alert>
       </Snackbar>}
     </Fragment>
-  )
+  );
 }
 
