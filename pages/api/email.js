@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 export default async function email(req, res) {
-  const { to, content } = req.query;
+  const { to, content, title } = req.query;
   let result = 'OK';
 
   try {
     if (to && content) {
       const response = await axios.post(process.env.MQ_URL, null, {
         params: {
-          to, content
+          to, content, title
         }
       });
       result = JSON.stringify(response?.data || {});
