@@ -8,8 +8,11 @@ import { Box, TextField } from '@mui/material';
 import { archive } from '../lib/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../store/feature/inputSlice';
+import moment from 'moment';
 
 export default function ToolPanel({ inputText, uid }) {
+
+  const nowUnixTime = moment().unix() * 1000;
 
   const title = useSelector((state) => state.input.title);
   const dispatch = useDispatch();

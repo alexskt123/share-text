@@ -11,7 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function EmailPanel() {
 
-  const [user, _setUser] = useUser();
+  const [user] = useUser();
   const userProfile = useProfile(user?.uid);
 
   const handleAdd = async () => {

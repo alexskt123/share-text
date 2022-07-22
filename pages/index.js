@@ -12,7 +12,7 @@ import HeaderPanel from '../components/HeaderPanel';
 
 export default function Home() {
   const height = use100vh();
-  const [user, _setUser] = useUser();
+  const [user] = useUser();
   const [defaultText, setDefaultText] = useState('');
   const uid = user?.uid;
 

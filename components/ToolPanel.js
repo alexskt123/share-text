@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 export default function ToolPanel({ inputText, clearText }) {
   const title = useSelector((state) => state.input.title);
 
-  const [user, _setUser] = useUser();
+  const [user] = useUser();
   const [defaultText, setDefaultText] = useState('');
   const [emailAlert, setEmailAlert] = useState(false);
   const [alertProps, setAlertProps] = useState({ message: '', severity: 'success', autoHideDuration: 2000 });

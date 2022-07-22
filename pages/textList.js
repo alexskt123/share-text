@@ -11,7 +11,7 @@ import { useArchiveText } from '../lib/firebase';
 export default function TextList() {
 
   const height = use100vh();
-  const [user, _setUser] = useUser();
+  const [user] = useUser();
   const archiveTextList = useArchiveText(user?.uid);
 
   return (
