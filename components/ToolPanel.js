@@ -19,6 +19,7 @@ export default function ToolPanel({ inputText, clearText }) {
   const uid = user?.uid;
   const profile = useProfile(uid);
   const whatsappPhone = profile?.whatsapp?.find(x => x.active)?.phone;
+  const userEmail = profile?.email?.find(x => x.active)?.to;
 
   const copyText = () => {
     setAlertProps({ ...alertProps, message: 'Copied!' });
@@ -26,11 +27,13 @@ export default function ToolPanel({ inputText, clearText }) {
   };
 
   const handleSend = () => {
-    uid && user?.email && axios.post('/api/email', null,
-      { params: { to: user.email, content: defaultText } }
+    const targetEmail = userEmail || user?.email;
+
+    uid && targetEmail && axios.post('/api/email', null,
+      { params: { to: userEmail || user.email, content: defaultText } }
     );
 
-    setAlertProps({ ...alertProps, message: `Email sent to ${user?.email}!` });
+    setAlertProps({ ...alertProps, message: `Email sent to ${targetEmail}!` });
     setEmailAlert(true);
   };
 
