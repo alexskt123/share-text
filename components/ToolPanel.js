@@ -10,8 +10,11 @@ import CustomSnackbar from '../components/CustomSnackbar';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useProfile } from '../lib/firebase';
+import { useSelector } from 'react-redux';
 
 export default function ToolPanel({ inputText, clearText }) {
+  const title = useSelector((state) => state.input.title);
+
   const [user, _setUser] = useUser();
   const [defaultText, setDefaultText] = useState('');
   const [emailAlert, setEmailAlert] = useState(false);
@@ -30,7 +33,7 @@ export default function ToolPanel({ inputText, clearText }) {
     const targetEmail = userEmail || user?.email;
 
     uid && targetEmail && axios.post('/api/email', null,
-      { params: { to: userEmail || user.email, content: defaultText } }
+      { params: { to: userEmail || user.email, content: defaultText, title } }
     );
 
     setAlertProps({ ...alertProps, message: `Email sent to ${targetEmail}!` });
