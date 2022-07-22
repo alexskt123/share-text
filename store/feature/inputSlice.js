@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 import moment from 'moment';
-import { GLOBAL_DATETIME_FORMAT } from '../config';
+import { GLOBAL_DATETIME_FORMAT } from '../../config';
 
 const nowUnixTime = moment().unix() * 1000;
 const nowTime = moment(nowUnixTime).format(GLOBAL_DATETIME_FORMAT);

@@ -7,7 +7,7 @@ import CustomSnackbar from './CustomSnackbar';
 import { Box, TextField } from '@mui/material';
 import { archive } from '../lib/firebase';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTitle } from '../store/inputSlice';
+import { setTitle } from '../store/feature/inputSlice';
 
 export default function ToolPanel({ inputText, uid }) {
 
