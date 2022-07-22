@@ -8,15 +8,19 @@ const nowTime = moment(nowUnixTime).format(GLOBAL_DATETIME_FORMAT);
 const inputSlice = createSlice({
   name: 'input',
   initialState: {
-    title: nowTime
+    title: nowTime,
+    text: ''
   },
   reducers: {
     setTitle: (state, titleObj) => {
       state.title = titleObj.payload
+    },
+    setText: (state, textObj) => {
+      state.text = textObj.payload
     }
   }
 })
 
-export const { setTitle } = inputSlice.actions
+export const { setTitle, setText } = inputSlice.actions
 
 export default inputSlice.reducer

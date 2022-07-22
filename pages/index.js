@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -9,30 +9,34 @@ import { useUser } from '../hooks/useUser';
 import ArchivePanel from '../components/ArchivePanel';
 import ToolPanel from '../components/ToolPanel';
 import HeaderPanel from '../components/HeaderPanel';
+import { useDispatch, useSelector } from 'react-redux';
+import { setText } from '../store/feature/inputSlice';
 
 export default function Home() {
   const height = use100vh();
   const [user] = useUser();
-  const [defaultText, setDefaultText] = useState('');
   const uid = user?.uid;
+
+  const defaultText = useSelector((state) => state.input.text);
+  const dispatch = useDispatch();
 
   const text = useText(uid);
   useEffect(() => {
-    text && setDefaultText(text?.text);
-  }, [text]);
+    text && dispatch(setText(text?.text));
+  }, [text, dispatch]);
 
   const handleChange = debounce(async (e) => {
     uid && e.target.value && writeText(uid, e.target.value);
   }, 1000);
 
   const changeText = (e) => {
-    setDefaultText(e.target.value);
+    dispatch(setText(e.target.value));
     handleChange(e);
   };
 
   const clearText = () => {
     uid && writeText(uid, '');
-    setDefaultText('');
+    dispatch(setText(''));
   };
 
   //template
@@ -56,8 +60,8 @@ export default function Home() {
               value={defaultText}
               onChange={e => changeText(e)}
             />
-            <ToolPanel inputText={defaultText} clearText={clearText} />
-            <ArchivePanel inputText={defaultText} uid={uid} />
+            <ToolPanel clearText={clearText} />
+            <ArchivePanel uid={uid} />
           </Box>
         </Container>
       }
