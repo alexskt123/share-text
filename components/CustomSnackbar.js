@@ -18,7 +18,6 @@ export default function CustomSnackbar({ alert, setAlert, alertProps }) {
     alert && setOpen(true);
   }, [alert]);
 
-  //template
   return (
     <Fragment>
       {alertProps && <Snackbar

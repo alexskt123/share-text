@@ -40,7 +40,6 @@ export default function ToolPanel({ clearText }) {
     setEmailAlert(true);
   };
 
-  //template
   return (
     <Fragment>
       {

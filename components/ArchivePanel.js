@@ -24,7 +24,7 @@ export default function ToolPanel({ uid }) {
   const archiveText = () => {
     setAlertProps({ ...alertProps, message: 'Archived!' });
     setEmailAlert(true);
-    archive(uid, { title: title, text, uid, createdAt: nowUnixTime });
+    archive({ title: title, text, uid, createdAt: nowUnixTime });
   };
 
   const changeText = (e) => {
