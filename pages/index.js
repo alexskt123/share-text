@@ -1,4 +1,4 @@
-import { useEffect, Fragment } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -11,6 +11,8 @@ import ToolPanel from '../components/ToolPanel';
 import HeaderPanel from '../components/HeaderPanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { setText } from '../store/feature/inputSlice';
+import LoadingOverlay from 'react-loading-overlay';
+LoadingOverlay.propTypes = undefined;
 
 export default function Home() {
   const height = use100vh();
@@ -19,10 +21,15 @@ export default function Home() {
 
   const defaultText = useSelector((state) => state.input.text);
   const dispatch = useDispatch();
-
   const text = useText(uid);
+
+  const [isLoading, setIsLoading] = useState(uid ? true : false);
+
   useEffect(() => {
-    text && dispatch(setText(text?.text));
+    if (text) {
+      dispatch(setText(text?.text));
+      setIsLoading(false);
+    }
   }, [text, dispatch]);
 
   const handleChange = debounce(async (e) => {
@@ -51,17 +58,23 @@ export default function Home() {
             sx={{ width: 1, height: height }}
           >
             <HeaderPanel />
-            <TextField
-              id="outlined-multiline-static"
-              sx={{ marginTop: '10px', width: 1, boxShadow: 3 }}
-              hiddenLabel
-              multiline
-              rows={15}
-              value={defaultText}
-              onChange={e => changeText(e)}
-            />
+            <LoadingOverlay
+              active={isLoading}
+              spinner
+              text='Loading your content...'
+            >
+              <TextField
+                id="outlined-multiline-static"
+                sx={{ marginTop: '10px', width: 1, boxShadow: 3 }}
+                hiddenLabel
+                multiline
+                rows={15}
+                value={defaultText}
+                onChange={e => changeText(e)}
+              />
             <ToolPanel clearText={clearText} />
             <ArchivePanel uid={uid} />
+            </LoadingOverlay>
           </Box>
         </Container>
       }

@@ -7,6 +7,7 @@ import HeaderPanel from '../components/HeaderPanel';
 import { Grid } from '@mui/material';
 import { useUser } from '../hooks/useUser';
 import { useArchiveText } from '../lib/firebase';
+import LoadingWithAvatar from '../components/loading/LoadingWithAvatar';
 
 export default function TextList() {
 
@@ -16,8 +17,9 @@ export default function TextList() {
 
   return (
     <Fragment>
+      {!height || user && !archiveTextList && <LoadingWithAvatar/>}
       {
-        height && <Container sx={{ height: height }}>
+        height && archiveTextList && <Container sx={{ height: height }}>
           <Box
             component="form"
             noValidate
