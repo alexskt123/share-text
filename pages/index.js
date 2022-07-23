@@ -72,8 +72,8 @@ export default function Home() {
                 value={defaultText}
                 onChange={e => changeText(e)}
               />
-            <ToolPanel clearText={clearText} />
-            <ArchivePanel uid={uid} />
+              <ToolPanel clearText={clearText} />
+              <ArchivePanel uid={uid} />
             </LoadingOverlay>
           </Box>
         </Container>
