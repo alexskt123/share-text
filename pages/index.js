@@ -9,6 +9,8 @@ import { useUser } from '../hooks/useUser';
 import ArchivePanel from '../components/ArchivePanel';
 import ToolPanel from '../components/ToolPanel';
 import HeaderPanel from '../components/HeaderPanel';
+import LoadingOverlay from 'react-loading-overlay';
+LoadingOverlay.propTypes = undefined;
 
 export default function Home() {
   const height = use100vh();
@@ -16,9 +18,14 @@ export default function Home() {
   const [defaultText, setDefaultText] = useState('');
   const uid = user?.uid;
 
+  const [isLoading, setIsLoading] = useState(uid ? true : false);
+
   const text = useText(uid);
   useEffect(() => {
-    text && setDefaultText(text?.text);
+    if (text) {
+      setDefaultText(text?.text);
+      setIsLoading(false);
+    }
   }, [text]);
 
   const handleChange = debounce(async (e) => {
@@ -47,17 +54,23 @@ export default function Home() {
             sx={{ width: 1, height: height }}
           >
             <HeaderPanel />
-            <TextField
-              id="outlined-multiline-static"
-              sx={{ marginTop: '10px', width: 1, boxShadow: 3 }}
-              hiddenLabel
-              multiline
-              rows={15}
-              value={defaultText}
-              onChange={e => changeText(e)}
-            />
-            <ToolPanel inputText={defaultText} clearText={clearText} />
-            <ArchivePanel inputText={defaultText} uid={uid} />
+            <LoadingOverlay
+              active={isLoading}
+              spinner
+              text='Loading your content...'
+            >
+              <TextField
+                id="outlined-multiline-static"
+                sx={{ marginTop: '10px', width: 1, boxShadow: 3 }}
+                hiddenLabel
+                multiline
+                rows={15}
+                value={defaultText}
+                onChange={e => changeText(e)}
+              />
+              <ToolPanel inputText={defaultText} clearText={clearText} />
+              <ArchivePanel inputText={defaultText} uid={uid} />
+            </LoadingOverlay>
           </Box>
         </Container>
       }
