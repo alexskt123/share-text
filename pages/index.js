@@ -9,37 +9,41 @@ import { useUser } from '../hooks/useUser';
 import ArchivePanel from '../components/ArchivePanel';
 import ToolPanel from '../components/ToolPanel';
 import HeaderPanel from '../components/HeaderPanel';
+import { useDispatch, useSelector } from 'react-redux';
+import { setText } from '../store/feature/inputSlice';
 import LoadingOverlay from 'react-loading-overlay';
 LoadingOverlay.propTypes = undefined;
 
 export default function Home() {
   const height = use100vh();
-  const [user, _setUser] = useUser();
-  const [defaultText, setDefaultText] = useState('');
+  const [user] = useUser();
   const uid = user?.uid;
+
+  const defaultText = useSelector((state) => state.input.text);
+  const dispatch = useDispatch();
+  const text = useText(uid);
 
   const [isLoading, setIsLoading] = useState(uid ? true : false);
 
-  const text = useText(uid);
   useEffect(() => {
     if (text) {
-      setDefaultText(text?.text);
+      dispatch(setText(text?.text));
       setIsLoading(false);
     }
-  }, [text]);
+  }, [text, dispatch]);
 
   const handleChange = debounce(async (e) => {
     uid && e.target.value && writeText(uid, e.target.value);
   }, 1000);
 
   const changeText = (e) => {
-    setDefaultText(e.target.value);
+    dispatch(setText(e.target.value));
     handleChange(e);
   };
 
   const clearText = () => {
     uid && writeText(uid, '');
-    setDefaultText('');
+    dispatch(setText(''));
   };
 
   //template
@@ -68,8 +72,8 @@ export default function Home() {
                 value={defaultText}
                 onChange={e => changeText(e)}
               />
-              <ToolPanel inputText={defaultText} clearText={clearText} />
-              <ArchivePanel inputText={defaultText} uid={uid} />
+              <ToolPanel clearText={clearText} />
+              <ArchivePanel uid={uid} />
             </LoadingOverlay>
           </Box>
         </Container>

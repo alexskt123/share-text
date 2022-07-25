@@ -19,4 +19,4 @@ export default async function email(req, res) {
 
   res.statusCode = 200;
   res.json({ response: result });
-};
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
@@ -12,11 +12,11 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useProfile } from '../lib/firebase';
 import { useSelector } from 'react-redux';
 
-export default function ToolPanel({ inputText, clearText }) {
+export default function ToolPanel({ clearText }) {
   const title = useSelector((state) => state.input.title);
+  const defaultText = useSelector((state) => state.input.text);
 
-  const [user, _setUser] = useUser();
-  const [defaultText, setDefaultText] = useState('');
+  const [user] = useUser();
   const [emailAlert, setEmailAlert] = useState(false);
   const [alertProps, setAlertProps] = useState({ message: '', severity: 'success', autoHideDuration: 2000 });
   const uid = user?.uid;
@@ -40,11 +40,6 @@ export default function ToolPanel({ inputText, clearText }) {
     setEmailAlert(true);
   };
 
-  useEffect(() => {
-    setDefaultText(inputText);
-  }, [inputText]);
-
-  //template
   return (
     <Fragment>
       {

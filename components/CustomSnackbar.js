@@ -5,7 +5,7 @@ import MuiAlert from '@mui/material/Alert';
 export default function CustomSnackbar({ alert, setAlert, alertProps }) {
   const [open, setOpen] = useState(false);
 
-  const handleClose = (_event) => {
+  const handleClose = () => {
     setOpen(false);
     setAlert(false);
   };
@@ -18,7 +18,6 @@ export default function CustomSnackbar({ alert, setAlert, alertProps }) {
     alert && setOpen(true);
   }, [alert]);
 
-  //template
   return (
     <Fragment>
       {alertProps && <Snackbar

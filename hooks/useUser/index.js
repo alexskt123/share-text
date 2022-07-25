@@ -6,20 +6,15 @@ import { useEffect } from 'react'
 const useUserState = createPersistedState('user')
 
 export const useUser = () => {
-    const [user, setUser] = useUserState(null)
+  const [user, setUser] = useUserState(null)
 
-    useEffect(() => {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-            } else {
-              // User is signed out
-              // ...
-            }
-          });
-        
-    }, [])
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      user && setUser(user);
+    });
 
-    return [user, setUser]
+  }, [])
+
+  return [user, setUser]
 }

@@ -15,7 +15,6 @@ export default function HeaderPanel() {
     router.push('/');
   };
 
-  //template
   return (
     <Fragment>
       {

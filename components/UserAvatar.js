@@ -1,7 +1,6 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import SignInModal from './SignInModal';
 import { getAuth } from 'firebase/auth';
 import { Divider } from '@mui/material';
@@ -12,6 +11,7 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useRouter } from 'next/router';
+import CustomMenuItem from './menu/CustomMenuItem';
 
 export default function UserAvatar() {
   const router = useRouter();
@@ -70,31 +70,27 @@ export default function UserAvatar() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={() => handleProfileClick()}>
-          <AccountCircleIcon />
-          <span style={{ marginLeft: '7px' }}>
-            {'Profile'}
-          </span>
-        </MenuItem>
-        <MenuItem onClick={() => handleTextListClick()}>
-          <TextSnippetIcon />
-          <span style={{ marginLeft: '7px' }}>
-            {'Text List'}
-          </span>
-        </MenuItem>
+        <CustomMenuItem
+          onClick={handleProfileClick}
+          icon={<AccountCircleIcon />}
+          text={'Profile'}
+        />
+        <CustomMenuItem
+          onClick={handleTextListClick}
+          icon={<TextSnippetIcon />}
+          text={'Text List'}
+        />
         <Divider />
-        {!user && <MenuItem onClick={() => handleLogIn()}>
-          <LoginIcon />
-          <span style={{ marginLeft: '7px' }}>
-            {'Log In'}
-          </span>
-        </MenuItem>}
-        {user && <MenuItem onClick={() => handleLogOut()}>
-          <LogoutIcon />
-          <span style={{ marginLeft: '7px' }}>
-            {'Log Out'}
-          </span>
-        </MenuItem>}
+        {!user && <CustomMenuItem
+          onClick={handleLogIn}
+          icon={<LoginIcon />}
+          text={'Log In'}
+        />}
+        {user && <CustomMenuItem
+          onClick={handleLogOut}
+          icon={<LogoutIcon />}
+          text={'Log Out'}
+        />}
       </Menu>
       <SignInModal show={showSignInModal} handleClose={handleClose} />
     </Fragment>

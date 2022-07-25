@@ -12,7 +12,7 @@ import LoadingWithAvatar from '../components/loading/LoadingWithAvatar';
 export default function TextList() {
 
   const height = use100vh();
-  const [user, _setUser] = useUser();
+  const [user] = useUser();
   const archiveTextList = useArchiveText(user?.uid);
 
   return (
