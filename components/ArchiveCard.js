@@ -9,6 +9,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import CustomSnackbar from './CustomSnackbar';
 import moment from 'moment';
 import { GLOBAL_DATETIME_FORMAT } from '../config';
+import SendEmail from './tool/SendEmail';
 
 export default function BasicCard({ title, text, createdAt, id }) {
 
@@ -34,7 +35,7 @@ export default function BasicCard({ title, text, createdAt, id }) {
           <Typography sx={{ fontSize: 14, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
             {title}
           </Typography>
-          <Typography sx={{ background: '#f2f4f7', padding: '5px'}} variant="body2">
+          <Typography sx={{ background: '#f2f4f7', padding: '5px' }} variant="body2">
             {text}
           </Typography>
           <Typography sx={{ fontSize: 10, marginTop: '10px' }} color="text.secondary">
@@ -46,6 +47,7 @@ export default function BasicCard({ title, text, createdAt, id }) {
             onCopy={() => copyText()}>
             <Button size="small" sx={{ color: 'blue' }}>{'Copy'}</Button>
           </CopyToClipboard>
+          <SendEmail text={text} />
           <Button size="small" sx={{ color: 'red' }} onClick={() => deleteArchive(id)}>{'Delete'}</Button>
         </CardActions>
       </Card>
